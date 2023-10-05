@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import click
 from datetime import date
 from methods import create_event, create_guest, create_venue, \
