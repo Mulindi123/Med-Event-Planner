@@ -12,7 +12,7 @@ session = Session()
 
 #Method to create an event
 def create_event(event_name, date, description):
-    event = Event(event_name=event_name, date = datetime.strptime(date, "%Y-%m-%d").date(), description=description)
+    event = Event(event_name=event_name, date = date, description=description)
     session.add(event)
     session.commit()
     return event
@@ -59,6 +59,10 @@ def list_guests_by_event_id(event_id):
 # List all available venues
 def list_all_venues():
     return session.query(Venue).all()
+
+# List all available guests
+def list_all_guests():
+    return session.query(Guest).all()
 
 # Delete event by ID
 def delete_event_by_id(event_id):
