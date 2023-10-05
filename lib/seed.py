@@ -72,16 +72,15 @@ if __name__ == "__main__":
         session.commit()
         venues.append(venue)
 
+    for event in events:
+        num_attendees = random.randint(1, 5)
+        attendees = random.sample(guests, num_attendees)
+        event.guests.extend(attendees)
+
     for venue in venues:
-        venue_guests = random.randint(1,5)
-        guests_to_assign = random.sample(guests,venue_guests)
+        num_guests = random.randint(1, 5)
+        guests_to_assign = random.sample(guests, num_guests)
         venue.guests.extend(guests_to_assign)
-        session.commit()
+    session.commit()
 
     session.close()
-       
-
-       
-    
-
-
