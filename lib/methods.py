@@ -32,3 +32,59 @@ def create_venue(venue_name, address):
     session.commit()
     return venue
 
+
+# Query event by ID
+def get_event_by_id(event_id):
+    return session.query(Event).filter(Event.id == event_id).first()
+
+# Query guest by ID
+def get_guest_by_id(guest_id):
+    return session.query(Guest).filter(Guest.id == guest_id).first()
+
+# Query venue by ID
+def get_venue_by_id(venue_id):
+    return session.query(Venue).filter(Venue.id == venue_id).first()
+
+# List all available events
+def list_all_events():
+    return session.query(Event).all()
+
+# List all guests invited to an event by event ID
+def list_guests_by_event_id(event_id):
+    event = get_event_by_id(event_id)
+    if event:
+        return event.guests
+    return []
+
+# List all available venues
+def list_all_venues():
+    return session.query(Venue).all()
+
+# Delete event by ID
+def delete_event_by_id(event_id):
+    event = get_event_by_id(event_id)
+    if event:
+        session.delete(event)
+        session.commit()
+        return True
+    return False
+
+# Delete guest by ID
+def delete_guest_by_id(guest_id):
+    guest = get_guest_by_id(guest_id)
+    if guest:
+        session.delete(guest)
+        session.commit()
+        return True
+    return False
+
+# Delete venue by ID
+def delete_venue_by_id(venue_id):
+    venue = get_venue_by_id(venue_id)
+    if venue:
+        session.delete(venue)
+        session.commit()
+        return True
+    return False
+
+
