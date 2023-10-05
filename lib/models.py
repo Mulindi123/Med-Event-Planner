@@ -53,7 +53,7 @@ class Guest(Base):
  
     #Defines relationships
     events = relationship('Event', secondary=guest_event_association, back_populates='guests')
-    venues = relationship('Venue', backref=backref('guest'))
+    # venues = relationship('Venue', backref=backref('guest'))
 
 
     # Method to provide a string representation of the guest object
@@ -69,11 +69,11 @@ class Venue(Base):
     venue_name = Column(String, nullable = False)
     address = Column(String)
     event_id =Column(Integer, ForeignKey("events.id"))
-    guest_id = Column(Integer, ForeignKey("guests.id"))
+    # guest_id = Column(Integer, ForeignKey("guests.id"))
 
     #Defines relationships
     #events = relationship('Event', backref=backref('venues'))
-    # guests = relationship('Guest', back_populates='venues')
+    guests = relationship('Guest', backref=backref("guest"))
     
      # Method to provide a string representation of the venue object
     def __repr__(self):
