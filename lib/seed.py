@@ -3,6 +3,7 @@ from sqlalchemy.orm import sessionmaker
 from models import Event, Guest, Venue
 from  faker import Faker
 import random
+from datetime import datetime
 
 fake = Faker()
 if __name__ == "__main__":
@@ -11,7 +12,9 @@ if __name__ == "__main__":
     session =Session()
 
 
-
+    session.query(Guest).delete()
+    session.query(Event).delete()
+    session.query(Venue).delete()
 
     event_names = [
     "Cosmic Carnival",
@@ -29,7 +32,7 @@ if __name__ == "__main__":
     for i in range(10):
         event = Event(
             event_name = random.choice(event_names),
-            date = fake.date(),
+            date = datetime.strptime(fake.date(), '%Y-%m-%d'),
             description= fake.sentence()
         )
         session.add(event)
@@ -43,7 +46,7 @@ if __name__ == "__main__":
         )
         session.add(guest)
         session.commit()
-        guest.append(guest)
+        guests.append(guest)
 
 
     venue_names = [
