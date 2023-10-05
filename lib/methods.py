@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models import Event, Guest, Venue
+from datetime import datetime
 
 
 # Initializes the database and creates a session
@@ -11,7 +12,7 @@ session = Session()
 
 #Method to create an event
 def create_event(event_name, date, description):
-    event = Event(event_name=event_name, date=date, description=description)
+    event = Event(event_name=event_name, date = datetime.strptime(date, "%Y-%m-%d").date(), description=description)
     session.add(event)
     session.commit()
     return event
